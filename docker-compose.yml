@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=blog_api
+      - POSTGRES_PASSWORD=Cae46h1gFRaT24dS
+      - POSTGRES_DB=blog_api_db
+    ports:
+      - 5432:5432
+
+  server:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - 3333:3333
+      - 9229:9229
+    links:
+      - database
+    depends_on:
+      - database
