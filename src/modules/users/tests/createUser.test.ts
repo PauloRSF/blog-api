@@ -1,8 +1,22 @@
 import supertest from 'supertest';
 
+import connection from '@config/typeorm/connection';
 import app from '../../../server';
 
 describe('Sua aplicação deve ter o endpoint POST `/user`', () => {
+  beforeAll(async () => {
+    await connection.create();
+    await connection.synchronize();
+  });
+
+  afterEach(async () => {
+    await connection.synchronize();
+  });
+
+  afterAll(async () => {
+    await connection.close();
+  });
+
   it('Será validado que é possível cadastrar um usuário com sucesso', (done) => {
     supertest(app)
       .post('/user')

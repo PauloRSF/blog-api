@@ -1,8 +1,29 @@
 import supertest from 'supertest';
 
+import connection from '../../../config/typeorm/connection';
 import app from '../../../server';
+import UserEntity from '../infra/typeorm/entities/userEntity';
+
+import seeds from './seeds';
 
 describe('Sua aplicação deve ter o endpoint GET `/user/:id`', () => {
+  beforeEach(async () => {
+    await connection.loadSeeds(UserEntity, seeds);
+  });
+
+  afterEach(async () => {
+    await connection.synchronize();
+  })
+
+  beforeAll(async () => {
+    await connection.create();
+    await connection.synchronize();
+  });
+
+  afterAll(async () => {
+    await connection.close();
+  });
+
   it('Será validado que é possível listar um usuário específico com sucesso', (done) => {
     supertest(app)
       .post('/login')
