@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*": ["shared/*"],
+      "@config/*": ["config/*"],
+      "@modules/*": ["modules/*"]
+    },
+    "types": ["jest", "node"]
+  },
+  "compileOnSave": true,
+  "lib": ["ES6"]
+}
