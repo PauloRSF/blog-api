@@ -2,6 +2,7 @@
 
 Projeto desenvolvido como teste técnico para vaga de Software Engineer.
 
+[![Build Status](https://circleci.com/gh/PauloRSF/blog-api.svg?style=svg)](https://circleci.com/gh/PauloRSF/blog-api)
 [![Standard Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![TypeScript](https://badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)](https://www.typescriptlang.org/)
 
