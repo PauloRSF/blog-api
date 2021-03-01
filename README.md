@@ -1,6 +1,10 @@
 # Blog API
 
 Projeto desenvolvido como teste técnico para vaga de Software Engineer.
+
+[![Standard Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![TypeScript](https://badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)](https://www.typescriptlang.org/)
+
 ***
 
 ## :memo: Descrição
