@@ -51,3 +51,6 @@ $ yarn test
 # ou, se estiver usando o docker-compose:
 $ sudo docker-compose exec server yarn test
 ```
+
+## Insomnia
+Em `public/apiEndpoints.json` há um arquivo JSON do Insomnia com os endpoints da API e um ambiente com as variáveis de URL base e de token para as requisições autenticadas.
