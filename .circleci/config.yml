@@ -1,0 +1,40 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/node:14.15-buster
+      - image: circleci/postgres:9.6-alpine
+        environment:
+          POSTGRES_USER: blog_api
+          POSTGRES_DB: blog_api_db
+          POSTGRES_PASSWORD: Cae46h1gFRaT24dS
+    steps:
+      - checkout
+      - run:
+          name: Waiting for Postgres to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgres && exit 1
+
+      - run: yarn install
+
+      - run:
+          name: Run tests
+          environment:
+            DATABASE_URL: 'postgres://blog_api:Cae46h1gFRaT24dS@localhost:5432/blog_api_db'
+            JWT_SECRET: imveryskilledatkeepingsecrets
+            JWT_EXPIRATION: 86400000
+
+          command: |
+            yarn test
+
+workflows:
+  test:
+    jobs:
+      - test
