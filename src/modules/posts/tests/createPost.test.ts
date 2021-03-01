@@ -2,7 +2,29 @@ import supertest from 'supertest';
 
 import app from '../../../server';
 
+import connection from '@config/typeorm/connection';
+
+import UserEntity from '@modules/users/infra/typeorm/entities/userEntity';
+import userSeeds from '@modules/users/tests/seeds';
+
 describe('Sua aplicação deve ter o endpoint POST `/post`', () => {
+  beforeEach(async () => {
+    await connection.loadSeeds(UserEntity, userSeeds);
+  });
+
+  afterEach(async () => {
+    await connection.synchronize();
+  });
+
+  beforeAll(async () => {
+    await connection.create();
+    await connection.synchronize();
+  });
+
+  afterAll(async () => {
+    await connection.close();
+  });
+
   it('Será validado que é possível cadastrar um blogpost com sucesso', (done) => {
     supertest(app)
       .post('/login')

@@ -2,7 +2,33 @@ import supertest from 'supertest';
 
 import app from '../../../server';
 
+import connection from '@config/typeorm/connection';
+
+import PostEntity from '../infra/typeorm/entities/postEntity';
+import postSeeds from '@modules/posts/tests/seeds';
+
+import UserEntity from '@modules/users/infra/typeorm/entities/userEntity';
+import userSeeds from '@modules/users/tests/seeds';
+
 describe('Sua aplicação deve ter o endpoint DELETE `post/:id`', () => {
+  beforeEach(async () => {
+    await connection.loadSeeds(UserEntity, userSeeds);
+    await connection.loadSeeds(PostEntity, postSeeds);
+  });
+
+  afterEach(async () => {
+    await connection.synchronize();
+  });
+
+  beforeAll(async () => {
+    await connection.create();
+    await connection.synchronize();
+  });
+
+  afterAll(async () => {
+    await connection.close();
+  });
+
   it('Será validado que é possível deletar um blogpost com sucesso', (done) => {
     supertest(app)
       .post('/login')
